@@ -1,0 +1,12 @@
+--- comando para conectarse al respositorio del sistema y actualiza la lista de paquetes
+--- disponibles y sus versiones
+sudo apt update
+(en estos pasos es posible que pida un passw)
+
+
+--- comado para descargar los paquetes e instalarlos actualizando el software
+sudo apt upgrade
+
+
+--- comando para instalar un gestor de actualizaciones
+sudo apt install update-manager-core
