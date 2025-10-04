@@ -1,0 +1,14 @@
+--- comando para saber la direccion ip
+ifconfig
+
+
+--- comando para instalas las utilidades de SSH y el servidor permita acciones remotas
+ sudo apt-get install openssh-server
+
+ --- comado para limpiar terminal
+ clean
+
+--- sirve para ver las targeta de red  y ver la ip dinamica/estatica del vervido o
+ip a
+
+
