@@ -12,3 +12,6 @@ ifconfig
 ip a
 
 
+--- este comado sirve para visualizar el conteneido de archivos de texto
+--- tambien para concatenar varios archivos en uno solo
+cat /---/___direccion del archivo

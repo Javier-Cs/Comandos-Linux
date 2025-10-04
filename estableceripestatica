@@ -1,0 +1,71 @@
+1
+--- revisamos el ip dinámica que está establecido temporalmente
+ip a
+
+buscamos la tarjeta de red que normalmente es algo parecido a esto "enps25"
+el dato que muestra la ip dinámica sería así
+"inet 192.168.100.103"
+
+
+2
+ahora debemos de saber el rango de las ips que el routes asigna dinámicamente a los equipos
+para así evitar que nuestra ip estática este en ese rango
+lo normal es ingresar  a la interfaz del router en el navegador
+LAN>
+    DHCP
+
+    en esta pestaña se observará el inicio y el fin del rango de las ips dinámicas
+    también podremos observar el ip del GETWAY
+
+
+    !si el rango de inicio y fin abarca todos los ip
+    reduce a la mitad toda la cantidad en el router
+
+3
+ubunto usa net paln para las configuraciones del networking
+--- ahora accedemos la dirección de netplan con el siguiente comando
+ls -la /etc/netplan/
+
+se te mostrarán varios archivos
+utiliamos el que termina en .yaml
+--- usamos cat para visualizar el archivo con el siguiente comando
+cat /etc/netplan/nombreDelArchivo.yaml
+
+--- ahora editamos el archivo .yaml con los permisos de sudo y el editor de texto nano
+sudo nano /etc/netplan/nombreDelArchivo.yaml
+
+nos aparecerá una interfaz eliminamos el contenido y ponemos con espacio (no usar tabulación):
+
+# Este es el archivo de configuración de red de Netplan
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33: # <--- Reemplaza 'ens33' con el nombre de tu interfaz
+      dhcp4: no # Desactiva DHCP para IPv4
+      addresses:
+        - 192.168.1.100/24 # <--- Tu IP estática y máscara de subred
+      routes:
+        - to: default
+          via: 192.168.1.1 # <--- La IP de tu Gateway/Router
+      nameservers:
+          addresses: [192.168.1.1, 8.8.8.8, 1.1.1.1] # <--- Tus servidores DNS
+
+
+
+4
+guardamos los cambios con Ctrl+x
+--- y aplicamos los cambios con el comando
+sudo netplan apply
+
+
+
+5
+Verifica que la nueva IP se haya aplicado y que tengas conexión a Internet:
+Verifica la IP asignada:
+
+ip a | grep "inet "
+
+6
+Verifica la conexión a Internet:
+ping google.com
