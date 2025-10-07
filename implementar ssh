@@ -1,0 +1,42 @@
+1- para implementar la conexión al servidor ubuntu mediante SSH
+Necesitamos revisar si tenemos instalado SSH
+
+--- comando
+sudo systemctl status ssh
+
+para verificar debemos de buscarla opción "Active(runting)"
+si no está activado
+
+
+
+2- instalar y activar servicio SSH
+
+--- Actualizamos los paquetes del repositorio del sistema
+sudo apt update
+
+--- instalamos el paquete OpenSSH Server  en la máquina
+sudo apt install openssh-server  -y
+
+--- activamos el servidor SSH
+sudo systemctl enable ssh
+
+--- iniciamos el servicio
+sudo systemctl start ssh
+
+systemctl start → Indica que se debe arrancar el servicio indicado.
+ssh → Es el servicio que se inicia.
+
+--- podemos usar el primer comando para verificar nuevamente
+
+
+
+3-
+ahora para poder conectamos desde una máquina Windows debemos de saber la IP del servidor, el usuario ya la contraseña
+
+--- ahora abrimos CMD o PowerShell y ponemos el comando
+ssh javier@192.168.1.105
+ e ingresas la contraseña
+
+
+
+
