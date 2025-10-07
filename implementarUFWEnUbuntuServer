@@ -1,0 +1,35 @@
+1-
+--- saber la version de nuestro firewall
+dpkg -s ufw | grep -i "version"
+
+o
+ufw version
+
+
+2-
+actualizacion o descarga de UFW
+
+--- actualizamos el paquete de UFW con el comando
+sudo apt-get install ufw
+
+--- podemos instalarlo con el comando
+sudo apt update
+
+--- y despues
+sudo apt install ufw
+
+--- tendriamos que habilitar ufw
+
+(Habilita primero la conexión SSH: si te conectas a través de SSH
+para no perder el acceso al servidor:
+    sudo ufw allow ssh
+)
+--- comando de habilitar
+sudo ufw enable
+
+--- verificamos
+sudo ufw status
+
+
+
+3-
