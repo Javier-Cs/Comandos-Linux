@@ -39,3 +39,30 @@ Verificar que el puerto 80 esté libre
 --- Vuelve a ejecutar el comando para confirmar que ya no hay nada escuchando en el puerto 80:
 sudo ss -tuln | grep 80
 
+
+
+#### 2
+en caso de que al volver a verificar el puerto 80 se vuelva a reiniciar  en el servicio anterior
+
+Detener el Proceso Conflictivo y Deshabilitar su Reinicio
+en este el proceso que usa el puerto 80 es httpd y tiene el nuevo PID 2061797.
+El hecho de que se reinicie significa que un servicio de systemd lo está gestionando.
+
+2.1-
+Detén el servicio: Intenta de nuevo con el nombre de servicio más común para httpd en sistemas basados en Ubuntu/Debian,
+que a veces es solo apache.
+
+# Intenta con 'apache' si 'httpd' falló antes
+sudo systemctl stop apache
+
+si falla ahora debemos de hacerlo por el IDP
+--- pero debes de apuntar al nuevo idp, ya que cada cierto tiempo cambia, ejemplo
+sudo kill 2061797
+
+--- Verifica de nuevo
+sudo netstat -tulnp | grep 80
+
+--- Iniciar tu Nuevo Apache2
+sudo systemctl start apache2
+sudo systemctl status apache2
+
