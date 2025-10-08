@@ -1,0 +1,41 @@
+en este caso necesitamos implementar el puerto 80 para nuestro servidor apache
+
+Lo más común es que otro servidor web (como Nginx, un Apache que no se detuvo correctamente,
+o incluso un servicio de desarrollo) esté escuchando en el puerto 80.
+
+
+1-
+identificar el proceso que esta utilizando el puerto 80
+
+--- Utiliza el comando ss (o netstat, aunque ss es más moderno)
+para ver qué proceso está escuchando en el puerto 80
+
+sudo ss -tuln | grep 80
+# Opcional, si ss no muestra el PID:
+sudo netstat -tulnp | grep 80
+
+nos puede mostrar la línea en la que otro proceso ya está usando el puerto 80, impidiendo que Apache2 se inicie.
+ejemplo
+Puerto en uso: :80 (el puerto estándar HTTP).
+PID (ID de Proceso): 4658.
+Nombre del programa: httpd.
+
+
+2-
+detener el servisio
+en este caso httpd
+
+--- Ya que el proceso se llama httpd,
+--- lo más seguro es intentar detener el servicio asociado usando systemctl.
+sudo systemctl stop httpd
+
+--- Si ese comando no funciona (porque el nombre del servicio no es exactamente httpd en tu distribución),
+--- puedes usar el PID (4658) para detenerlo a la fuerza:
+sudo kill 4658
+
+
+3-
+Verificar que el puerto 80 esté libre
+--- Vuelve a ejecutar el comando para confirmar que ya no hay nada escuchando en el puerto 80:
+sudo ss -tuln | grep 80
+
