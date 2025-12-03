@@ -1,0 +1,7 @@
+para combiar lla contraseña de ubuntu se utiliza el comando
+  --  passwd
+
+para saber la distribucion de el disco
+usamos el comando
+  --  df -h
+(Disk Free, en formato legible para humanos) muestra cuánto espacio se está utilizando y cuánto está disponible en los sistemas de archivos montados.
