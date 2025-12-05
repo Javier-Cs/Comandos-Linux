@@ -5,3 +5,26 @@ para saber la distribucion de el disco
 usamos el comando
   --  df -h
 (Disk Free, en formato legible para humanos) muestra cuánto espacio se está utilizando y cuánto está disponible en los sistemas de archivos montados.
+
+--- ver los servicios que estan coriendo
+systemctl list--units --type=service --state=running
+
+--- ver sistema operativo y version
+lsb release -a
+
+--- verifica si el firewall esta activado
+sudo ufw status
+
+
+--- habilita ssh para no quedarte a fuera
+sudo ufw allow ssh
+
+--- para habilitar un puerto usa
+sudo ufw allow 5522/tcp
+
+--- activar el firewall
+sudo ufw enable
+
+-- antes de instalar cualquier cosa verifica que puertos estan abiertos con:
+sudo ufw status verbose
+
