@@ -1,0 +1,47 @@
+primeramente en el vps vamos a subir los archivos de la publicacion en la carpeta var/www/Nombre de la carpeta donde se guardara la api
+
+--- creacion el servicio systemd
+sudo nano /etc/systemd/system/nombredelservicio.service
+
+y pones esto
+[Unit]
+Description=API Consulta Datos
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/api_consultadatos
+ExecStart=/usr/bin/dotnet /var/www/api_consultadatos/ConsultarDatos.dll
+
+Restart=always
+RestartSec=10
+
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://0.0.0.0:5000     (aqui no se establece dominio)
+
+SyslogIdentifier=api_consultadatos
+
+[Install]
+WantedBy=multi-user.target
+
+
+despues:
+Ctrl+o
+enter
+Ctrl+x
+
+
+--- Activar y arrancar el servicio
+sudo systemctl daemon-reload
+sudo systemctl enable api_consultadatos
+sudo systemctl start api_consultadatos
+
+--- Verificar estado
+sudo systemctl status api_consultadatos
+
+--- verificamos que este escuchando en el puerto 5000
+sudo ss -tulpn | grep 5000
+
+despues nos toca para permitir el tráfico externo
+Abrir el puerto 5000
+
