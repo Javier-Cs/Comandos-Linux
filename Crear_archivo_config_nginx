@@ -1,0 +1,47 @@
+-- listar archivos config ngmnix
+ls -l /etc/nginx/sites-available/
+ls -l /etc/nginx/sites-enabled/
+
+
+--crear  el archivo configuracion nginx
+sudo nano /etc/nginx/sites-available/api_tiendaConfig
+
+server {
+    listen 80;
+    server_name apioper.legumfrutsa.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name apioper.legumfrutsa.com;
+
+    ssl_certificate /etc/letsencrypt/live/apioper.legumfrutsa.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/apioper.legumfrutsa.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:8110;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+
+        proxy_redirect off;
+    }
+}
+
+--- descargar cerbot
+sudo apt install certbot python3-certbot-nginx -y
+
+--- Generar certificado
+sudo certbot --nginx -d apioper.legumfrutsa.com(nombre dominio o sub)
+
+--- validar
+sudo nginx -t
+
+--- recargar nginx
+sudo systemctl reload nginx
