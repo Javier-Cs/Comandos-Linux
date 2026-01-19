@@ -1,0 +1,30 @@
+como listar los servicios systemd
+--- systemctl list-units --type=service --state=running
+
+cree mi servicio
+root@vmi2949615:~# sudo nano /etc/systemd/system/api_tienda.service
+root@vmi2949615:~# sudo cat /etc/systemd/system/api_tienda.service
+server {
+    listen 80;
+    server_name --nombre--.com;
+
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name --nombre--.com;
+
+    location / {
+        proxy_pass http://12.0.0.1:8110;
+        proxy_http_version 1.1;
+
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+
+        proxy_redirect off;
+    }
+}
+root@vmi2949615:~#

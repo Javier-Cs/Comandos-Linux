@@ -17,7 +17,7 @@ RestartSec=10
 
 User=www-data
 Environment=ASPNETCORE_ENVIRONMENT=Production
-Environment=ASPNETCORE_URLS=http://0.0.0.0:5000     (aqui no se establece dominio)
+Environment=ASPNETCORE_URLS=http://0.0.0.0:9000     (aqui no se establece dominio)
 
 SyslogIdentifier=api_consultadatos
 
