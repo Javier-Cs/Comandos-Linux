@@ -28,3 +28,7 @@ server {
     }
 }
 root@vmi2949615:~#
+
+sudo systemctl daemon-reload
+sudo systemctl enable api_tienda.service
+sudo systemctl start api_tienda.service
