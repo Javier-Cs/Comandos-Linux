@@ -1,0 +1,28 @@
+--- preparacion para trabajar con un backend python
+-- actualización del vps usando el comando
+apt update && apt upgrade -y
+
+-- instalar python y herramientas básicas, ubuntu 22.04 ya trae python por defecto
+python3 --version
+
+-- instalar herramientas necesarias
+apt install -y python3-venv python3-pip git
+
+-- creamos un entorno virtual
+python3 -m venv venv
+
+-- activamos el entorno
+source venv/bin/activate
+- debe salir algo como
+(venv) root@vps:~/yolo_backend#
+
+
+-- intalamos las dependencias necesarias dentro del entorno
+-- en este caso todo lo que tengamos en el archivo requirements.txt
+
+pip install --upgrade pip
+pip install -r requirements.txt
+
+
+-- usaremos uvicorn para probar la api y la probamos asi
+uvicorn main:app --host 0.0.0.0 --port 8000
