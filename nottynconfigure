@@ -1,0 +1,32 @@
+--- creacion de config
+sudo nano /etc/systemd/system/api_Nottyn.service
+
+
+--- contenido del archivo
+
+  GNU nano 6.2                             /etc/systemd/system/api_Nottyn.service                                       [Unit]
+Description=API Consulta Datos
+After=network.target
+
+[Service]
+WorkingDirectory=/var/www/api_nottyncap
+ExecStart=/usr/bin/dotnet /var/www/api_nottyncap/Nottyn.dll
+
+Restart=always
+RestartSec=10
+
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://0.0.0.0:0000      ----aqui va el puerto
+
+SyslogIdentifier=api_consultadatos
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+despues se ejecuta esto
+sudo systemctl daemon-reload
+sudo systemctl stop api_Nottyn
+sudo systemctl start api_Nottyn

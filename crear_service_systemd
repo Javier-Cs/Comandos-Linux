@@ -1,5 +1,5 @@
 como listar los servicios systemd
---- systemctl list-units --type=service --state=running
+---
 
 cree mi servicio
 root@vmi2949615:~# sudo nano /etc/systemd/system/api_tienda.service
